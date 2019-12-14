@@ -1,0 +1,37 @@
+task:
+    container:
+      dockerfile: .ci/Dockerfile
+      cpu: 8
+      memory: 16G
+    pub_cache:
+      folder: ~/.pub-cache
+    setup_script:
+      - flutter channel stable
+      - flutter upgrade
+    test_script:
+      - cd flutter_appcenter_bundle/example
+      - flutter pub get
+      - flutter test
+    build_script: 
+      - cd flutter_appcenter_bundle/example
+      - flutter build apk
+  
+task:
+    osx_instance:
+      image: mojave-flutter
+    pub_cache:
+      folder: ~/.pub-cache
+    setup_script:
+      - pod repo update
+      - flutter channel stable
+      - flutter upgrade
+    create_simulator_script:
+      - xcrun simctl list
+      - xcrun simctl create Flutter-iPhone com.apple.CoreSimulator.SimDeviceType.iPhone-X com.apple.CoreSimulator.SimRuntime.iOS-13-2 | xargs xcrun simctl boot
+    test_script:
+      - cd flutter_appcenter_bundle/example
+      - flutter pub get
+      - flutter test
+    build_script: 
+      - cd flutter_appcenter_bundle/example
+      - flutter build ios --no-codesign
