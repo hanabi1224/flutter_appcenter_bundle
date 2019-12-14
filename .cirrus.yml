@@ -8,10 +8,13 @@ task:
     setup_script:
       - flutter channel stable
       - flutter upgrade
+    test_script:
+      - cd flutter_appcenter_bundle/example
+      - flutter pub get
+      - flutter test
     build_script: 
       - cd flutter_appcenter_bundle/example
       - flutter build apk
-    test_script: flutter test
   
 task:
     osx_instance:
@@ -25,8 +28,10 @@ task:
     create_simulator_script:
       - xcrun simctl list
       - xcrun simctl create Flutter-iPhone com.apple.CoreSimulator.SimDeviceType.iPhone-X com.apple.CoreSimulator.SimRuntime.iOS-13-2 | xargs xcrun simctl boot
+    test_script:
+      - cd flutter_appcenter_bundle/example
+      - flutter pub get
+      - flutter test
     build_script: 
       - cd flutter_appcenter_bundle/example
       - flutter build ios --no-codesign
-    test_script: flutter test
-  
