@@ -13,7 +13,7 @@ task:
       - flutter build apk
     test_script: flutter test
   
-  task:
+task:
     osx_instance:
       image: mojave-flutter
     pub_cache:
