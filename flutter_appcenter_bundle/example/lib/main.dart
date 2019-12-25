@@ -8,9 +8,9 @@ void main() async {
   await AppCenter.startAsync(
     appSecretAndroid: '49361c2e-b788-4bc2-a33d-838b04b3e06b',
     appSecretIOS: '2da3d93f-6b3f-48f9-920f-2d63ae3cd25a',
-    enableDistribute: true,
+    enableDistribute: false,
   );
-  await AppCenter.configureDistributeDebugAsync(enabled: true);
+  await AppCenter.configureDistributeDebugAsync(enabled: false);
 
   runApp(MyApp());
 }

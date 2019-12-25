@@ -32,17 +32,17 @@ class AppCenter {
 
     WidgetsFlutterBinding.ensureInitialized();
     await _methodChannel.invokeMethod('start', appsecret.trim());
+    _started = true;
+
     if (!enableAnalytics) {
       await configureAnalyticsAsync(enabled: enableAnalytics);
     }
     if (!enableCrashes) {
-      await configureAnalyticsAsync(enabled: enableCrashes);
+      await configureCrashesAsync(enabled: enableCrashes);
     }
     if (!enableDistribute) {
-      await configureAnalyticsAsync(enabled: enableDistribute);
+      await configureDistributeAsync(enabled: enableDistribute);
     }
-
-    _started = true;
   }
 
   static Future trackEventAsync(String name,
