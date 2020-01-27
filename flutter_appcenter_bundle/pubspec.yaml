@@ -1,11 +1,13 @@
 name: flutter_appcenter_bundle
 description: This plugin currently bundles appcenter analytics, crashes and distribute. To learn more about AppCenter, go to https://aka.ms/appcenterdocs
-version: 1.0.0+4
+version: 1.1.0+1
 homepage: https://github.com/hanabi1224/flutter_appcenter_bundle
 publish_to: https://pub.dev/
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
+  # Flutter versions prior to 1.10 did not support the flutter.plugin.platforms map.
+  flutter: ">=1.10.0 <2.0.0"
 
 dependencies:
   flutter:
@@ -25,8 +27,12 @@ flutter:
   # be modified. They are used by the tooling to maintain consistency when
   # adding or updating assets for this project.
   plugin:
-    androidPackage: com.github.hanabi1224.flutter_appcenter_bundle
-    pluginClass: FlutterAppcenterBundlePlugin
+    platforms:
+      android:
+        package: com.github.hanabi1224.flutter_appcenter_bundle
+        pluginClass: FlutterAppcenterBundlePlugin
+      ios:
+        pluginClass: FlutterAppcenterBundlePlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
