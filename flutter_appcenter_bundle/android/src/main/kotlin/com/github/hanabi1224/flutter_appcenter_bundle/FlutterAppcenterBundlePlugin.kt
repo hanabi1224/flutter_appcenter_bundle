@@ -7,6 +7,7 @@ import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.analytics.Analytics
 import com.microsoft.appcenter.crashes.Crashes
 import com.microsoft.appcenter.distribute.Distribute
+import com.microsoft.appcenter.distribute.UpdateTrack
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -71,7 +72,12 @@ class FlutterAppcenterBundlePlugin : FlutterPlugin, MethodCallHandler {
                         return
                     }
 
-                    val appSecret = call.arguments as String
+                    val appSecret = call.argument<String>("secret")
+                    val usePrivateTrack = call.argument<Boolean>("usePrivateTrack")
+                    if (usePrivateTrack == true){
+                        Distribute.setUpdateTrack(UpdateTrack.PRIVATE);
+                    }
+
                     if (appSecret == null || appSecret.isEmpty()) {
                         val error = "App secret is not set"
                         Log.e(call.method, error)

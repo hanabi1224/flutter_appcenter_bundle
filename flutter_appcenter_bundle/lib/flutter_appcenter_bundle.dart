@@ -9,13 +9,13 @@ final _methodChannelName = "com.github.hanabi1224.flutter_appcenter_bundle";
 final _methodChannel = MethodChannel(_methodChannelName);
 
 class AppCenter {
-  static var _started = false;
   static Future startAsync({
     @required String appSecretAndroid,
     @required String appSecretIOS,
     enableAnalytics = true,
     enableCrashes = true,
     enableDistribute = false,
+    usePrivateDistributeTrack = false,
   }) async {
     String appsecret;
     if (Platform.isAndroid) {
@@ -31,18 +31,15 @@ class AppCenter {
     }
 
     WidgetsFlutterBinding.ensureInitialized();
-    await _methodChannel.invokeMethod('start', appsecret.trim());
-    _started = true;
 
-    if (!enableAnalytics) {
-      await configureAnalyticsAsync(enabled: enableAnalytics);
-    }
-    if (!enableCrashes) {
-      await configureCrashesAsync(enabled: enableCrashes);
-    }
-    if (!enableDistribute) {
-      await configureDistributeAsync(enabled: enableDistribute);
-    }
+    await configureAnalyticsAsync(enabled: enableAnalytics);
+    await configureCrashesAsync(enabled: enableCrashes);
+    await configureDistributeAsync(enabled: enableDistribute);
+
+    await _methodChannel.invokeMethod('start', <String, dynamic>{
+      'secret': appsecret.trim(),
+      'usePrivateTrack': usePrivateDistributeTrack,
+    });
   }
 
   static Future trackEventAsync(String name,
@@ -54,51 +51,30 @@ class AppCenter {
   }
 
   static Future<bool> isAnalyticsEnabledAsync() async {
-    if (!_started) {
-      return false;
-    }
     return await _methodChannel.invokeMethod('isAnalyticsEnabled');
   }
 
   static Future configureAnalyticsAsync({@required enabled}) async {
-    if (!_started) {
-      return;
-    }
     await _methodChannel.invokeMethod('configureAnalytics', enabled);
   }
 
   static Future<bool> isCrashesEnabledAsync() async {
-    if (!_started) {
-      return false;
-    }
     return await _methodChannel.invokeMethod('isCrashesEnabled');
   }
 
   static Future configureCrashesAsync({@required enabled}) async {
-    if (!_started) {
-      return;
-    }
     await _methodChannel.invokeMethod('configureCrashes', enabled);
   }
 
   static Future<bool> isDistributeEnabledAsync() async {
-    if (!_started) {
-      return false;
-    }
     return await _methodChannel.invokeMethod('isDistributeEnabled');
   }
 
   static Future configureDistributeAsync({@required enabled}) async {
-    if (!_started) {
-      return;
-    }
     await _methodChannel.invokeMethod('configureDistribute', enabled);
   }
 
   static Future configureDistributeDebugAsync({@required enabled}) async {
-    if (!_started) {
-      return;
-    }
     await _methodChannel.invokeMethod('configureDistributeDebug', enabled);
   }
 }
