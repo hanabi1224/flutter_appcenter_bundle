@@ -29,11 +29,11 @@ public class SwiftFlutterAppcenterBundlePlugin: NSObject, FlutterPlugin {
                 return
             }
 
-let secret = args["secret"] as! String
-let usePrivateTrack = args["usePrivateTrack"] as! Bool
-if(usePrivateTrack){
-    MSDistribute.updateTrack = MSUpdateTrackPrivate
-}
+            let secret = args["secret"] as! String
+            let usePrivateTrack = args["usePrivateTrack"] as! Bool
+            if (usePrivateTrack) {
+                MSDistribute.updateTrack = MSUpdateTrackPrivate
+            }
 
             MSAppCenter.start(secret, withServices:[
                 MSAnalytics.self,
