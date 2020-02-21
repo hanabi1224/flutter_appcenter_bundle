@@ -24,7 +24,18 @@ public class SwiftFlutterAppcenterBundlePlugin: NSObject, FlutterPlugin {
         debugPrint(call.method)
         switch call.method {
         case "start":
-            MSAppCenter.start(call.arguments as! String, withServices:[
+            guard let args:[String: Any] = (call.arguments as? [String: Any]) else {
+                result(FlutterError(code: "400", message:  "Bad arguments", details: "iOS could not recognize flutter arguments in method: (start)") )
+                return
+            }
+
+let secret = args["secret"] as! String
+let usePrivateTrack = args["usePrivateTrack"] as! Bool
+if(usePrivateTrack){
+    MSDistribute.updateTrack = MSUpdateTrackPrivate
+}
+
+            MSAppCenter.start(secret, withServices:[
                 MSAnalytics.self,
                 MSCrashes.self,
                 MSDistribute.self,
