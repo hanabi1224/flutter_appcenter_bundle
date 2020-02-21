@@ -1,3 +1,8 @@
+## 3.0.0+1
+* Upgrade native AppCenter SDK to 3.0.0 (Change Logs: [Android](https://github.com/microsoft/appcenter-sdk-android/releases/tag/3.0.0) / [IOS](https://github.com/microsoft/appcenter-sdk-apple/releases/tag/3.0.0))
+* Upgrade package version to 3.0.0 as well to match native SDK version
+* Add optional usePrivateDistributeTrack parameter to AppCenter.start method to support new private update track introduced in native SDK 3.0.0
+
 ## 1.1.0+1
 * (Breaking) Upgrade pubspec.yaml to use (plugin platform)[https://flutter.dev/docs/development/packages-and-plugins/developing-packages#plugin-platforms] (This drops support for flutter prior to 1.10)
 
