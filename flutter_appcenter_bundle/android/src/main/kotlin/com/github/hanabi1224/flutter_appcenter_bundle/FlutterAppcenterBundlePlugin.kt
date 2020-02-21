@@ -71,7 +71,12 @@ class FlutterAppcenterBundlePlugin : FlutterPlugin, MethodCallHandler {
                         return
                     }
 
-                    val appSecret = call.arguments as String
+                    val appSecret = call.argument<String>("secret")
+                    val usePrivateTrack = call.argument(Boolean)("usePrivateTrack")
+                    if (usePrivateTrack){
+                        Distribute.setUpdateTrack(UpdateTrack.PRIVATE);
+                    }
+
                     if (appSecret == null || appSecret.isEmpty()) {
                         val error = "App secret is not set"
                         Log.e(call.method, error)
