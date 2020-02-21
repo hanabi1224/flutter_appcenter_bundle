@@ -24,9 +24,13 @@ await AppCenter.startAsync(
     enableAnalytics: true, // Defaults to true
     enableCrashes: true, // Defaults to true
     enableDistribute: true, // Defaults to false
+    usePrivateDistributeTrack: false, // Defaults to false
   );
   
-AppCenter.trackEvent('my event');
+AppCenter.trackEventAsync('my event', <String, String> {
+  'prop1': 'prop1',
+  'prop2': 'prop2',
+});
 ```
 
 ### Turn feature on / off at runtime
