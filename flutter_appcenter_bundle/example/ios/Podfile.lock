@@ -1,18 +1,18 @@
 PODS:
-  - AppCenter (1.2.0):
-    - AppCenter/Analytics (= 1.2.0)
-    - AppCenter/Crashes (= 1.2.0)
-  - AppCenter/Analytics (1.2.0):
+  - AppCenter (3.0.0):
+    - AppCenter/Analytics (= 3.0.0)
+    - AppCenter/Crashes (= 3.0.0)
+  - AppCenter/Analytics (3.0.0):
     - AppCenter/Core
-  - AppCenter/Core (1.2.0)
-  - AppCenter/Crashes (1.2.0):
+  - AppCenter/Core (3.0.0)
+  - AppCenter/Crashes (3.0.0):
     - AppCenter/Core
-  - AppCenter/Distribute (1.2.0):
+  - AppCenter/Distribute (3.0.0):
     - AppCenter/Core
   - Flutter (1.0.0)
   - flutter_appcenter_bundle (0.0.1):
-    - AppCenter
-    - AppCenter/Distribute
+    - AppCenter (~> 3.0)
+    - AppCenter/Distribute (~> 3.0)
     - Flutter
   - package_info (0.0.1):
     - Flutter
@@ -35,9 +35,9 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/package_info/ios"
 
 SPEC CHECKSUMS:
-  AppCenter: d0b68b2a7a87ac0aed78e66f36d87fd321d0a29c
+  AppCenter: 7a0bbe928d07467ac8b2d7f6f2a675872a6471d8
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  flutter_appcenter_bundle: afad3a6fb778e92771f3c58b7835060a7f2ffb42
+  flutter_appcenter_bundle: 7bafcccededaf9654405c50eb5e1df426276e11c
   package_info: 48b108e75b8802c2d5e126f208ef540561c98aef
 
 PODFILE CHECKSUM: 1d70c30602384d810fe07245fc37f78162e248e4
