@@ -17,7 +17,7 @@ RUN sudo apt-get update && sudo apt-get install -y google-cloud-sdk && \
 
 RUN yes | sdkmanager \
     "platforms;android-29" \
-    "build-tools;29.0.2" \
+    "build-tools;29.0.5" \
     "extras;google;m2repository" \
     "extras;android;m2repository"
 

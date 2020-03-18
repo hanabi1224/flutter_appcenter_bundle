@@ -51,6 +51,10 @@ public class SwiftFlutterAppcenterBundlePlugin: NSObject, FlutterPlugin {
         case "configureDistributeDebug":
             result(nil)
             return
+        case "disableAutomaticCheckForUpdate":
+            MSDistribute.disableAutomaticCheckForUpdate()
+        case "checkForUpdate":
+            MSDistribute.checkForUpdate()
         case "isCrashesEnabled":
             result(MSCrashes.isEnabled())
             return

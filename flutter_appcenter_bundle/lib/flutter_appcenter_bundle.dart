@@ -16,6 +16,7 @@ class AppCenter {
     enableCrashes = true,
     enableDistribute = false,
     usePrivateDistributeTrack = false,
+    disableAutomaticCheckForUpdate = false,
   }) async {
     String appsecret;
     if (Platform.isAndroid) {
@@ -31,6 +32,10 @@ class AppCenter {
     }
 
     WidgetsFlutterBinding.ensureInitialized();
+
+    if (disableAutomaticCheckForUpdate) {
+      await disableAutomaticCheckForUpdateAsync();
+    }
 
     await configureAnalyticsAsync(enabled: enableAnalytics);
     await configureCrashesAsync(enabled: enableCrashes);
@@ -76,5 +81,13 @@ class AppCenter {
 
   static Future configureDistributeDebugAsync({@required enabled}) async {
     await _methodChannel.invokeMethod('configureDistributeDebug', enabled);
+  }
+
+  static Future disableAutomaticCheckForUpdateAsync() async {
+    await _methodChannel.invokeMethod('disableAutomaticCheckForUpdate');
+  }
+
+  static Future checkForUpdateAsync() async {
+    await _methodChannel.invokeMethod('checkForUpdate');
   }
 }

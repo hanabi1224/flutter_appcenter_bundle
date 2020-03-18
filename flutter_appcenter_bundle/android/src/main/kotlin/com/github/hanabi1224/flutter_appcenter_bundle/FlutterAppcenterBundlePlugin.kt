@@ -104,6 +104,12 @@ class FlutterAppcenterBundlePlugin : FlutterPlugin, MethodCallHandler {
                     val value = call.arguments as Boolean
                     Distribute.setEnabledForDebuggableBuild(value)
                 }
+                "disableAutomaticCheckForUpdate" -> {
+                    Distribute.disableAutomaticCheckForUpdate()
+                }
+                "checkForUpdate" -> {
+                    Distribute.checkForUpdate()
+                }
                 "isCrashesEnabled" -> {
                     result.success(Crashes.isEnabled().get())
                     return
