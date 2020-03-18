@@ -1,3 +1,8 @@
+## 3.1.0+1
+* Upgrade native AppCenter SDK to 3.1.0 (Change Logs: [Android](https://github.com/microsoft/appcenter-sdk-android/releases/tag/3.1.0) / [IOS](https://github.com/microsoft/appcenter-sdk-apple/releases/tag/3.1.0))
+* [Feature] Add a **disableAutomaticCheckForUpdate** parameter to **AppCenter.startAsync** function.
+* [Feature] Add a **checkForUpdateAsync** API to manually check for update.
+
 ## 3.0.0+1
 * Upgrade native AppCenter SDK to 3.0.0 (Change Logs: [Android](https://github.com/microsoft/appcenter-sdk-android/releases/tag/3.0.0) / [IOS](https://github.com/microsoft/appcenter-sdk-apple/releases/tag/3.0.0))
 * Upgrade package version to 3.0.0 as well to match native SDK version
