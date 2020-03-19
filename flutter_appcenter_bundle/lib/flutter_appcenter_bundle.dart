@@ -34,7 +34,7 @@ class AppCenter {
     WidgetsFlutterBinding.ensureInitialized();
 
     if (disableAutomaticCheckForUpdate) {
-      await disableAutomaticCheckForUpdateAsync();
+      await _disableAutomaticCheckForUpdateAsync();
     }
 
     await configureAnalyticsAsync(enabled: enableAnalytics);
@@ -83,7 +83,7 @@ class AppCenter {
     await _methodChannel.invokeMethod('configureDistributeDebug', enabled);
   }
 
-  static Future disableAutomaticCheckForUpdateAsync() async {
+  static Future _disableAutomaticCheckForUpdateAsync() async {
     await _methodChannel.invokeMethod('disableAutomaticCheckForUpdate');
   }
 
