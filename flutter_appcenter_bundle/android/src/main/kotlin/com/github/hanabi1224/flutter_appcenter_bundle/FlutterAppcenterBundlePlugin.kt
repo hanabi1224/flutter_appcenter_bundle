@@ -9,6 +9,8 @@ import com.microsoft.appcenter.crashes.Crashes
 import com.microsoft.appcenter.distribute.Distribute
 import com.microsoft.appcenter.distribute.UpdateTrack
 import io.flutter.embedding.engine.plugins.FlutterPlugin
+import io.flutter.embedding.engine.plugins.activity.ActivityAware
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
@@ -16,25 +18,9 @@ import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.Registrar
 
 /** FlutterAppcenterBundlePlugin */
-class FlutterAppcenterBundlePlugin : FlutterPlugin, MethodCallHandler {
+class FlutterAppcenterBundlePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        val tag = "onAttachedToEngine"
-        var context = flutterPluginBinding.applicationContext
-        while (context != null) {
-            Log.w(tag, "Trying to resolve Application from Context: ${context.javaClass.name}")
-            application = context as Application
-            if (application != null) {
-                Log.i(tag, "Resolved Application from Context")
-                break
-            } else {
-                context = context.applicationContext
-            }
-        }
-        if (application == null) {
-            Log.e(tag, "Fail to resolve Application from Context")
-        }
-
-        val channel = MethodChannel(flutterPluginBinding.flutterEngine.dartExecutor, methodChannelName)
+        val channel = MethodChannel(flutterPluginBinding.binaryMessenger, methodChannelName)
         channel.setMethodCallHandler(FlutterAppcenterBundlePlugin())
     }
 
@@ -104,6 +90,12 @@ class FlutterAppcenterBundlePlugin : FlutterPlugin, MethodCallHandler {
                     val value = call.arguments as Boolean
                     Distribute.setEnabledForDebuggableBuild(value)
                 }
+                "disableAutomaticCheckForUpdate" -> {
+                    Distribute.disableAutomaticCheckForUpdate()
+                }
+                "checkForUpdate" -> {
+                    Distribute.checkForUpdate()
+                }
                 "isCrashesEnabled" -> {
                     result.success(Crashes.isEnabled().get())
                     return
@@ -133,5 +125,19 @@ class FlutterAppcenterBundlePlugin : FlutterPlugin, MethodCallHandler {
     }
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+    }
+
+    override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+        val activity = binding.activity
+        application = activity.application
+    }
+
+    override fun onDetachedFromActivity() {
+    }
+
+    override fun onDetachedFromActivityForConfigChanges() {
+    }
+
+    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
     }
 }
