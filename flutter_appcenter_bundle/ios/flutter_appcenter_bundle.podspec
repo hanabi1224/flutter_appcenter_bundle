@@ -14,8 +14,8 @@ A new flutter plugin project.
   s.author           = { 'Your Company' => 'email@example.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
-  s.dependency 'AppCenter', '~> 3.1'
-  s.dependency 'AppCenter/Distribute', '~> 3.1'
+  s.dependency 'AppCenter', '~> 3.1.1'
+  s.dependency 'AppCenter/Distribute', '~> 3.1.1'
   s.dependency 'Flutter'
   s.platform = :ios, '8.0'
   s.static_framework = true
