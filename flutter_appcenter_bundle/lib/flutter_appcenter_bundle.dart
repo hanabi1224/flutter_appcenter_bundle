@@ -59,6 +59,10 @@ class AppCenter {
     return await _methodChannel.invokeMethod('isAnalyticsEnabled');
   }
 
+  static Future<String> getInstallIdAsync() async {
+    return await _methodChannel.invokeMethod('getInstallId').then((r) => r as String);
+  }
+
   static Future configureAnalyticsAsync({@required enabled}) async {
     await _methodChannel.invokeMethod('configureAnalytics', enabled);
   }

@@ -46,6 +46,9 @@ public class SwiftFlutterAppcenterBundlePlugin: NSObject, FlutterPlugin {
         case "isDistributeEnabled":
             result(MSDistribute.isEnabled())
             return
+        case "getInstallId":
+            result(MSAppCenter.installId().uuidString)
+            return
         case "configureDistribute":
             MSDistribute.setEnabled(call.arguments as! Bool)
         case "configureDistributeDebug":
