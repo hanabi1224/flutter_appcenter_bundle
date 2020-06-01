@@ -82,6 +82,10 @@ class FlutterAppcenterBundlePlugin : FlutterPlugin, MethodCallHandler, ActivityA
                     result.success(Distribute.isEnabled().get())
                     return
                 }
+                "getInstallId" -> {
+                    result.success(AppCenter.getInstallId().get()?.toString())
+                    return
+                }
                 "configureDistribute" -> {
                     val value = call.arguments as Boolean
                     Distribute.setEnabled(value).get()
