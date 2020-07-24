@@ -7,7 +7,7 @@ This plugin currently bundles appcenter analytics, crashes and distribute.
 
 ## Getting Started
 
-To get started, go to [AppCenter](http://appcenter.ms/apps) and register your apps.
+To get started, go to [AppCenter](https://appcenter.ms/apps) and register your apps.
 
 For detailed AppCenter API reference, go to https://aka.ms/appcenterdocs
 
