@@ -32,6 +32,16 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
+    flavorDimensions "distribute"
+    productFlavors {
+        appCenter {
+            dimension "distribute"
+        }
+        googlePlay {
+            dimension "distribute"
+        }
+    }
+
     lintOptions {
         disable 'InvalidPackage'
     }
