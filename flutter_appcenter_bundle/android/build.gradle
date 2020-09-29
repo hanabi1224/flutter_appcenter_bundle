@@ -37,16 +37,26 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
+    flavorDimensions "distribute"
+    productFlavors {
+        appCenter {
+            dimension "distribute"
+        }
+        googlePlay {
+            dimension "distribute"
+        }
+    }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.annotation:annotation:1.1.0'
 
-    def appCenterSdkVersion = '3.2.1'
+    def appCenterSdkVersion = '3.3.1'
     implementation "com.microsoft.appcenter:appcenter-analytics:$appCenterSdkVersion"
     implementation "com.microsoft.appcenter:appcenter-crashes:$appCenterSdkVersion"
-    implementation "com.microsoft.appcenter:appcenter-distribute:$appCenterSdkVersion"
+    appCenterImplementation "com.microsoft.appcenter:appcenter-distribute:${appCenterSdkVersion}"
+    googlePlayImplementation "com.microsoft.appcenter:appcenter-distribute-play:${appCenterSdkVersion}"
 
     if (System.env.FLUTTER_ROOT != null) {
         println "FLUTTER_ROOT: $System.env.FLUTTER_ROOT"
