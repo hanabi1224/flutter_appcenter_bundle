@@ -14,7 +14,7 @@ task:
       - flutter test
     build_script: 
       - cd flutter_appcenter_bundle/example
-      - flutter build apk --flavor appCenter
+      - flutter build apk
   
 task:
     osx_instance:
@@ -27,7 +27,7 @@ task:
       - flutter upgrade
     create_simulator_script:
       - xcrun simctl list
-      - xcrun simctl create Flutter-iPhone com.apple.CoreSimulator.SimDeviceType.iPhone-X com.apple.CoreSimulator.SimRuntime.iOS-13-4 | xargs xcrun simctl boot
+      - xcrun simctl create Flutter-iPhone com.apple.CoreSimulator.SimDeviceType.iPhone-X com.apple.CoreSimulator.SimRuntime.iOS-13-5 | xargs xcrun simctl boot
     test_script:
       - cd flutter_appcenter_bundle/example
       - flutter pub get
