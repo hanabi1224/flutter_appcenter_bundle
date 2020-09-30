@@ -63,14 +63,14 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
         }
-
-        applicationVariants.all { variant ->
-            variant.outputs.all {
-                def filePath = "../../../flutter-apk"
-                println("My Path: " + filePath)
-                outputFileName = new File(filePath, "app-debug.apk")
-            }
-        }
+//
+//        applicationVariants.all { variant ->
+//            variant.outputs.all {
+//                def filePath = "../../../flutter-apk"
+//                println("My Path: " + filePath)
+//                outputFileName = new File(filePath, "app-debug.apk")
+//            }
+//        }
 
     }
 
