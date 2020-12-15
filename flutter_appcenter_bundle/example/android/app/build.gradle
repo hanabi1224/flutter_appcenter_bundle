@@ -32,6 +32,17 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
+    flavorDimensions "distribute"
+    productFlavors {
+        appCenter {
+            dimension "distribute"
+        }
+
+        googlePlay {
+            dimension "distribute"
+        }
+    }
+
     lintOptions {
         disable 'InvalidPackage'
     }
@@ -52,7 +63,18 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
         }
+
+        applicationVariants.all { variant ->
+            variant.outputs.all {
+                def filePath = "../../../flutter-apk"
+                println("My Path: " + filePath)
+                println(variant.buildType.name);
+                outputFileName = new File(filePath, "app-${variant.buildType.name}.apk")
+            }
+        }
+
     }
+
 }
 
 flutter {
