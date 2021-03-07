@@ -1,3 +1,9 @@
+## 4.0.0
+
+- Migrate Dart code to null safety
+- Upgrade example
+- Upgrade framework code for iOS example
+
 ## 3.2.0+2
 
 - Fix pub.dev package score
