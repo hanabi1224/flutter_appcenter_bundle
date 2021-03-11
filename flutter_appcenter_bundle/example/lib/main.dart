@@ -21,35 +21,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  PackageInfo _packageInfo;
-  bool _isCrashesEnabled;
-  bool _isAnalyticsEnabled;
-  bool _isDistributeEnabled;
-
   @override
   void initState() {
     super.initState();
     AppCenter.trackEventAsync('_MyAppState.initState');
-    PackageInfo.fromPlatform().then((v) {
-      setState(() {
-        _packageInfo = v;
-      });
-    });
-    AppCenter.isCrashesEnabledAsync().then((v) {
-      setState(() {
-        _isCrashesEnabled = v;
-      });
-    });
-    AppCenter.isAnalyticsEnabledAsync().then((v) {
-      setState(() {
-        _isAnalyticsEnabled = v;
-      });
-    });
-    AppCenter.isDistributeEnabledAsync().then((v) {
-      setState(() {
-        _isDistributeEnabled = v;
-      });
-    });
   }
 
   @override
@@ -60,27 +35,86 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Container(
-            padding: EdgeInsets.all(20),
-            child: _packageInfo == null
-                ? RefreshProgressIndicator()
-                : Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text('App name:\n${_packageInfo.appName}'),
-                      Text(''),
-                      Text('Package name:\n${_packageInfo.packageName}'),
-                      Text(''),
-                      Text('Version:\n${_packageInfo.version}'),
-                      Text(''),
-                      Text('Build:\n${_packageInfo.buildNumber}'),
-                      Text(''),
-                      Text('IsCrashesEnabled: $_isCrashesEnabled'),
-                      Text('IsAnalyticsEnabled: $_isAnalyticsEnabled'),
-                      Text('IsDistributeEnabled: $_isDistributeEnabled'),
-                    ],
-                  )),
+          padding: EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const PackageInfoContent(),
+              const SizedBox(height: 8.0),
+              FutureBuilder(
+                future: AppCenter.isCrashesEnabledAsync(),
+                builder: (_, AsyncSnapshot<bool?> snapshot) {
+                  if (snapshot.hasData) {
+                    final isCrashesEnabled = snapshot.data!;
+
+                    return Text('IsCrashesEnabled: $isCrashesEnabled');
+                  }
+
+                  return const CircularProgressIndicator.adaptive();
+                },
+              ),
+              const SizedBox(height: 8.0),
+              FutureBuilder(
+                future: AppCenter.isAnalyticsEnabledAsync(),
+                builder: (_, AsyncSnapshot<bool?> snapshot) {
+                  if (snapshot.hasData) {
+                    final isAnalyticsEnabled = snapshot.data!;
+
+                    return Text('IsAnalyticsEnabled: $isAnalyticsEnabled');
+                  }
+
+                  return const CircularProgressIndicator.adaptive();
+                },
+              ),
+              const SizedBox(height: 8.0),
+              FutureBuilder(
+                future: AppCenter.isDistributeEnabledAsync(),
+                builder: (_, AsyncSnapshot<bool?> snapshot) {
+                  if (snapshot.hasData) {
+                    final isDistributeEnabled = snapshot.data!;
+
+                    return Text('IsDistributeEnabled: $isDistributeEnabled');
+                  }
+
+                  return const CircularProgressIndicator.adaptive();
+                },
+              ),
+            ],
+          ),
+        ),
       ),
+    );
+  }
+}
+
+class PackageInfoContent extends StatelessWidget {
+  const PackageInfoContent();
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: PackageInfo.fromPlatform(),
+      builder: (_, AsyncSnapshot<PackageInfo> snapshot) {
+        if (snapshot.hasData) {
+          final packageInfo = snapshot.data!;
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('App name:\n${packageInfo.appName}'),
+              const SizedBox(height: 8.0),
+              Text('Package name:\n${packageInfo.packageName}'),
+              const SizedBox(height: 8.0),
+              Text('Version:\n${packageInfo.version}'),
+              const SizedBox(height: 8.0),
+              Text('Build:\n${packageInfo.buildNumber}'),
+            ],
+          );
+        }
+
+        return const CircularProgressIndicator.adaptive();
+      },
     );
   }
 }
