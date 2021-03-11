@@ -2,7 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  const MethodChannel channel = MethodChannel('flutter_appcenter_bundle');
+  const channel = MethodChannel('flutter_appcenter_bundle');
 
   TestWidgetsFlutterBinding.ensureInitialized();
 
