@@ -3,6 +3,7 @@
 - Migrate Dart code to null safety
 - Upgrade example
 - Upgrade framework code for iOS example
+- Upgrade native AppCenter SDK to 3.3.x (Change Logs: [Android](https://github.com/microsoft/appcenter-sdk-android/releases/tag/3.3.1) / [IOS](https://github.com/microsoft/appcenter-sdk-apple/releases/tag/3.3.4))
 
 ## 3.2.0+2
 
