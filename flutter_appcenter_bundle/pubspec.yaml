@@ -1,6 +1,6 @@
 name: flutter_appcenter_bundle
 description: This plugin currently bundles appcenter analytics, crashes and distribute. To learn more about AppCenter, go to https://aka.ms/appcenterdocs
-version: 4.0.0
+version: 3.3.1+1
 homepage: https://github.com/hanabi1224/flutter_appcenter_bundle
 publish_to: https://pub.dev/
 
@@ -33,7 +33,6 @@ flutter:
         pluginClass: FlutterAppcenterBundlePlugin
       ios:
         pluginClass: FlutterAppcenterBundlePlugin
-
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg
@@ -44,7 +43,6 @@ flutter:
   #
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
-
   # To add custom fonts to your plugin package, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

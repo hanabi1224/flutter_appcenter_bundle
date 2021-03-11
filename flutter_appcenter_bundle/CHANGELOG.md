@@ -1,4 +1,4 @@
-## 4.0.0
+## 3.3.1+1
 
 - Migrate Dart code to null safety
 - Upgrade example
