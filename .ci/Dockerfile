@@ -17,4 +17,10 @@ RUN yes | sdkmanager \
     "extras;google;m2repository" \
     "extras;android;m2repository"
 
+RUN yes | sdkmanager \
+    "platforms;android-29" \
+    "build-tools;29.0.2" \
+    "extras;google;m2repository" \
+    "extras;android;m2repository"
+
 RUN yes | sdkmanager --licenses
