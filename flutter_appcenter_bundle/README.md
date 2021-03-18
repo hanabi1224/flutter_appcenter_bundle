@@ -18,7 +18,30 @@ To workaround
 
 use ```flutter build --flavor googlePlay``` to build for googlePlay and ```flutter build --flavor appCenter``` for appCenter.
 
-```flutter build apk``` command will build both under build/app/outputs/flutter-apk
+```flutter build apk``` command will build both under build/app/outputs/flutter-apk by adding below section to android/app/build.gradle
+
+```gradle
+android {
+  ...
+
+  flavorDimensions "distribute"
+  productFlavors {
+      appCenter {
+          dimension "distribute"
+      }
+
+      googlePlay {
+          dimension "distribute"
+      }
+  }
+
+  // This is likely needed, see https://github.com/flutter/flutter/issues/58247
+  lintOptions {
+      disable 'InvalidPackage'
+      checkReleaseBuilds false
+  }
+}
+```
 
 **Try example project first when troubleshooting your local build issue.**
 
@@ -76,6 +99,8 @@ await AppCenter.checkForUpdateAsync(); // Manually check for update
     + compileSdkVersion in build.gradle
     + com.android.tools.build:gradle version in build.gradle
     + lintOptions (in example) See [issue](https://github.com/flutter/flutter/issues/58247)
+  
+      ```Execution failed for task ':app:lintVitalAppCenterRelease'```
     + build.gradle script (in example)
     + settings.gradle (in example)
 
