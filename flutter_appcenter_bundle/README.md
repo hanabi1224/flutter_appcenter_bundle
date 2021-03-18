@@ -43,6 +43,28 @@ android {
 }
 ```
 
+Already having flavor settings and want to merge? Checkout example project. Please note that flavor dimensions are orthogonal. Check out [this article](https://riptutorial.com/android-gradle/example/20559/using-flavor-dimension) for details.
+```gradle
+android {
+  flavorDimensions "dummy", "distribute"
+  productFlavors {
+      dummyFoo {
+          dimension "dummy"
+      }
+      dummyBar {
+          dimension "dummy"
+      }
+      appCenter {
+          dimension "distribute"
+      }
+
+      googlePlay {
+          dimension "distribute"
+      }
+  }
+}
+```
+
 **Try example project first when troubleshooting your local build issue.**
 
 ## Usage

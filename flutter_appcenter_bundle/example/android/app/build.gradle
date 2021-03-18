@@ -32,8 +32,14 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
-    flavorDimensions "distribute"
+    flavorDimensions "dummy", "distribute"
     productFlavors {
+        dummyFoo {
+            dimension "dummy"
+        }
+        dummyBar {
+            dimension "dummy"
+        }
         appCenter {
             dimension "distribute"
         }
