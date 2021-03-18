@@ -1,3 +1,8 @@
+## 3.3.1+2
+
+- Migrate off jcenter dependency as it will retire on 1st of May, 2021.
+- Update gradle setup to align with latest flutter stable project template.
+
 ## 3.3.1+1
 
 - Migrate Dart code to null safety
