@@ -14,7 +14,7 @@ task:
       - flutter test
     build_script: 
       - cd flutter_appcenter_bundle/example
-      - flutter build apk
+      - flutter build apk || ls build/app/outputs/flutter-apk
   
 task:
     osx_instance:

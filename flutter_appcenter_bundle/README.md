@@ -18,23 +18,32 @@ To workaround
 
 use ```flutter build --flavor googlePlay``` to build for googlePlay and ```flutter build --flavor appCenter``` for appCenter.
 
-Or refer to the [example project](https://github.com/hanabi1224/flutter_appcenter_bundle/blob/master/flutter_appcenter_bundle/example/android/build.gradle) to produce both with single ```flutter build apk``` command
+```flutter build apk``` command will build both under build/app/outputs/flutter-apk by adding below section to android/app/build.gradle
 
-Adding below section to your build.gradle
 ```gradle
-buildTypes {
-    ...
-    
-    applicationVariants.all { variant ->
-        variant.outputs.all {
-            def filePath = "../../../flutter-apk"
-            println("APK output path: " + filePath)
-            println(variant.buildType.name);
-            outputFileName = new File(filePath, "app-${variant.buildType.name}.apk")
-        }
-    }
+android {
+  ...
+
+  flavorDimensions "distribute"
+  productFlavors {
+      appCenter {
+          dimension "distribute"
+      }
+
+      googlePlay {
+          dimension "distribute"
+      }
+  }
+
+  // This is likely needed, see https://github.com/flutter/flutter/issues/58247
+  lintOptions {
+      disable 'InvalidPackage'
+      checkReleaseBuilds false
+  }
 }
 ```
+
+**Try example project first when troubleshooting your local build issue.**
 
 ## Usage
 
@@ -73,8 +82,36 @@ await AppCenter.configureDistributeDebugAsync(enabled: true); // Android Only
 await AppCenter.checkForUpdateAsync(); // Manually check for update
 ```
 
-## Common Issues
+## Troubleshooting
 
 +  iOS: [!] CocoaPods could not find compatible versions for pod "AppCenter"
 
    Manually delete podfile.lock and rebuild, this is a common issue when upgrading iOS native dependencies.
+
++  Android build issue
+
+   Always check if example project builds first
+   If it does not build, please report an issue
+   If it builds, check the gradle setup
+   Checkpoints:
+    + Gradle version in gradle-wrapper.properties
+    + Kotlin version in build.gradle
+    + compileSdkVersion in build.gradle
+    + com.android.tools.build:gradle version in build.gradle
+    + lintOptions (in example) See [issue](https://github.com/flutter/flutter/issues/58247)
+  
+      ```Execution failed for task ':app:lintVitalAppCenterRelease'```
+    + build.gradle script (in example)
+    + settings.gradle (in example)
+
++  jcenter retirement
+   
+   Replace jcenter since it will [be retired](https://jfrog.com/blog/into-the-sunset-bintray-jcenter-gocenter-and-chartcenter/) on 1st of May, 2021.
+   ```gradle
+   repositories {
+        google()
+        // jcenter()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+   ```
