@@ -11,6 +11,31 @@ To get started, go to [AppCenter](https://appcenter.ms/apps) and register your a
 
 For detailed AppCenter API reference, go to https://aka.ms/appcenterdocs
 
+## Build
+
+Appcenter distribute has an [issue](https://docs.microsoft.com/en-us/appcenter/sdk/distribute/android#remove-in-app-updates-for-google-play-builds) with pulishing apps to google play.
+To workaround
+
+use ```flutter build --flavor googlePlay``` to build for googlePlay and ```flutter build --flavor appCenter``` for appCenter.
+
+Or refer to the [example project](https://github.com/hanabi1224/flutter_appcenter_bundle/blob/master/flutter_appcenter_bundle/example/android/build.gradle) to produce both with single ```flutter build apk``` command
+
+Adding below section to your build.gradle
+```gradle
+buildTypes {
+    ...
+    
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def filePath = "../../../flutter-apk"
+            println("APK output path: " + filePath)
+            println(variant.buildType.name);
+            outputFileName = new File(filePath, "app-${variant.buildType.name}.apk")
+        }
+    }
+}
+```
+
 ## Usage
 
 ### Basic usage
