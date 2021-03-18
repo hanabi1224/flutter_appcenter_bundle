@@ -72,3 +72,9 @@ await AppCenter.configureDistributeDebugAsync(enabled: true); // Android Only
 
 await AppCenter.checkForUpdateAsync(); // Manually check for update
 ```
+
+## Common Issues
+
++  iOS: [!] CocoaPods could not find compatible versions for pod "AppCenter"
+
+   Manually delete podfile.lock and rebuild, this is a common issue when upgrading iOS native dependencies.
