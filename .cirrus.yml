@@ -1,11 +1,12 @@
 task:
     container:
       dockerfile: .ci/Dockerfile
-      cpu: 8
-      memory: 16G
+      # cpu: 8
+      # memory: 16G
     pub_cache:
       folder: ~/.pub-cache
     setup_script:
+      - java --version
       - flutter channel stable
       - flutter upgrade
     test_script:
@@ -14,7 +15,8 @@ task:
       - flutter test
     build_script: 
       - cd flutter_appcenter_bundle/example
-      - flutter build apk || ls build/app/outputs/flutter-apk
+      - flutter build apk || echo 'ignore error'
+      - ls build/app/outputs/flutter-apk
   
 task:
     osx_instance:
