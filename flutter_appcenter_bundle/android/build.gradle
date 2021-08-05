@@ -2,7 +2,7 @@ group 'com.github.hanabi1224.flutter_appcenter_bundle'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.4.31'
+    ext.kotlin_version = '1.5.21'
     repositories {
         google()
         mavenCentral()
@@ -10,7 +10,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.2'
+        classpath 'com.android.tools.build:gradle:7.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -27,13 +27,13 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
     }
     lintOptions {
         disable 'InvalidPackage'
@@ -52,9 +52,9 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
-    def appCenterSdkVersion = '3.3.1'
+    def appCenterSdkVersion = '4.2.0'
     implementation "com.microsoft.appcenter:appcenter-analytics:$appCenterSdkVersion"
     implementation "com.microsoft.appcenter:appcenter-crashes:$appCenterSdkVersion"
     appCenterImplementation "com.microsoft.appcenter:appcenter-distribute:${appCenterSdkVersion}"
