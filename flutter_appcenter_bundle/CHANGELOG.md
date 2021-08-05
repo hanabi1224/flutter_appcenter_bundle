@@ -1,3 +1,7 @@
+## 3.3.2
+
+- Update Android deps
+
 ## 3.3.1+2
 
 - Migrate off jcenter dependency as it will retire on 1st of May, 2021.
