@@ -19,7 +19,7 @@ RUN yes | sdkmanager \
 
 RUN yes | sdkmanager \
     "platforms;android-29" \
-    "build-tools;29.0.2" \
+    "build-tools;29.0.3" \
     "extras;google;m2repository" \
     "extras;android;m2repository"
 
