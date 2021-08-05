@@ -1,21 +1,19 @@
 task:
     container:
-      dockerfile: .ci/Dockerfile
+      dockerfile: cirrusci/flutter
       # cpu: 8
       # memory: 16G
     pub_cache:
       folder: ~/.pub-cache
     setup_script:
       - java --version
-      - flutter channel stable
-      - flutter upgrade
     test_script:
       - cd flutter_appcenter_bundle/example
       - flutter pub get
       - flutter test
     build_script: 
       - cd flutter_appcenter_bundle/example
-      - flutter build apk || echo 'ignore error'
+      - flutter build apk || echo 'ignore errors'
       - ls build/app/outputs/flutter-apk
   
 task:
