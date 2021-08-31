@@ -15,7 +15,6 @@ task:
       - cd flutter_appcenter_bundle/example
       - flutter build apk || echo 'ignore errors'
       - ls build/app/outputs/flutter-apk
-  
 task:
     osx_instance:
       image: catalina-flutter
