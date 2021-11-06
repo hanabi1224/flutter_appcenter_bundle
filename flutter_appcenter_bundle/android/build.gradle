@@ -44,6 +44,9 @@ android {
         appCenter {
             dimension "distribute"
         }
+        huawei {
+            dimension "distribute"
+        }
         googlePlay {
             isDefault true
             dimension "distribute"
@@ -59,6 +62,7 @@ dependencies {
     implementation "com.microsoft.appcenter:appcenter-crashes:$appCenterSdkVersion"
     appCenterImplementation "com.microsoft.appcenter:appcenter-distribute:${appCenterSdkVersion}"
     googlePlayImplementation "com.microsoft.appcenter:appcenter-distribute-play:${appCenterSdkVersion}"
+    huaweiImplementation "com.microsoft.appcenter:appcenter-distribute-play:${appCenterSdkVersion}"
 
     if (System.env.FLUTTER_ROOT != null) {
         println "FLUTTER_ROOT: $System.env.FLUTTER_ROOT"
