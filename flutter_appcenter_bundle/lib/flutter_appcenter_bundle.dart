@@ -57,6 +57,16 @@ class AppCenter {
     });
   }
 
+  /// Track error
+  static Future trackErrorAsync(String message,
+      [Map<String, String>? properties]) async {
+    await _methodChannel.invokeMethod('trackError', <String, dynamic>{
+      'message': message,
+      'properties': properties,
+      // Support `ErrorAttachmentLog`?
+    });
+  }
+
   /// Check whether analytics is enalbed
   static Future<bool?> isAnalyticsEnabledAsync() async {
     return await _methodChannel.invokeMethod('isAnalyticsEnabled');

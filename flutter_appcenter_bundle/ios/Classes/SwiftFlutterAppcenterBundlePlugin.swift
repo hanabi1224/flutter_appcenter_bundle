@@ -48,6 +48,16 @@ public class SwiftFlutterAppcenterBundlePlugin: NSObject, FlutterPlugin {
         case "trackEvent":
             trackEvent(call: call, result: result)
             return
+        case "trackError":
+            let args: [String: Any]? = (call.arguments as? [String: Any])
+            Crashes.trackError(
+                NSError(domain: Bundle.main.bundleIdentifier ?? "",
+                        code: -1,
+                        userInfo: [NSLocalizedDescriptionKey: args?["message"] ?? ""]),
+                properties: args?["properties"] as? [String: String],
+                attachments: nil
+            )
+            return
         case "isDistributeEnabled":
             result(MSDistribute.enabled)
             return
