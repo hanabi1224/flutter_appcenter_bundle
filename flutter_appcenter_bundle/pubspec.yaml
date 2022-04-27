@@ -1,6 +1,6 @@
 name: flutter_appcenter_bundle
 description: This plugin currently bundles AppCenter Analytics, Crashes and Distribute. To learn more about AppCenter, go to https://aka.ms/appcenterdocs
-version: 3.3.2
+version: 3.3.3
 homepage: https://github.com/hanabi1224/flutter_appcenter_bundle
 publish_to: https://pub.dev/
 
