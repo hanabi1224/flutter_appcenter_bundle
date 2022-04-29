@@ -1,3 +1,8 @@
+## 3.3.3
+
+- Upgrade native AppCenter SDK to 4.4.1 (Change Logs: [Android](https://github.com/microsoft/appcenter-sdk-android/releases/tag/4.4.1) / [IOS](https://github.com/microsoft/appcenter-sdk-apple/releases/tag/4.4.1))
+- Support for AppCenter trackError #26
+
 ## 3.3.2
 
 - Update Android deps

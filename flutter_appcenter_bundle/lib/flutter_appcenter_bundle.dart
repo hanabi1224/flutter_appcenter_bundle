@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:stack_trace/stack_trace.dart';
 
 final _methodChannelName = 'com.github.hanabi1224.flutter_appcenter_bundle';
 final _methodChannel = MethodChannel(_methodChannelName);
@@ -54,6 +55,16 @@ class AppCenter {
     await _methodChannel.invokeMethod('trackEvent', <String, dynamic>{
       'name': name,
       'properties': properties ?? <String, String>{},
+    });
+  }
+
+  /// Track error
+  static Future trackErrorAsync(String message, StackTrace? stackTrace,
+      [Map<String, String>? properties]) async {
+    await _methodChannel.invokeMethod('trackError', <String, dynamic>{
+      'message': message,
+      'properties': properties,
+      'stack': stackTrace.toString()
     });
   }
 

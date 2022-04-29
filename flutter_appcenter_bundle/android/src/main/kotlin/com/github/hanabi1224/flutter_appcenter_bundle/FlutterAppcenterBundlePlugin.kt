@@ -6,6 +6,7 @@ import androidx.annotation.NonNull
 import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.analytics.Analytics
 import com.microsoft.appcenter.crashes.Crashes
+import com.microsoft.appcenter.crashes.ingestion.models.ErrorAttachmentLog
 import com.microsoft.appcenter.distribute.Distribute
 import com.microsoft.appcenter.distribute.UpdateTrack
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -77,6 +78,18 @@ class FlutterAppcenterBundlePlugin : FlutterPlugin, MethodCallHandler, ActivityA
                     val name = call.argument<String>("name")
                     val properties = call.argument<Map<String, String>>("properties")
                     Analytics.trackEvent(name, properties)
+                }
+                "trackError" -> {
+                    val message = call.argument<String>("message")
+                    val properties = call.argument<Map<String, String>>("properties")
+                    val stack = call.argument<String?>("stack")
+                    val exception = Exception(message)
+                    //  exception.setStackTrace();
+                    Crashes.trackError(
+                            exception,
+                            properties,
+                            stack?.let { listOf(ErrorAttachmentLog.attachmentWithText(stack, "stack.txt")) }
+                    )
                 }
                 "isDistributeEnabled" -> {
                     result.success(Distribute.isEnabled().get())
