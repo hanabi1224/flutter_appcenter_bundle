@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:stack_trace/stack_trace.dart';
 
 final _methodChannelName = 'com.github.hanabi1224.flutter_appcenter_bundle';
 final _methodChannel = MethodChannel(_methodChannelName);
@@ -58,12 +59,12 @@ class AppCenter {
   }
 
   /// Track error
-  static Future trackErrorAsync(String message,
+  static Future trackErrorAsync(String message, StackTrace? stackTrace,
       [Map<String, String>? properties]) async {
     await _methodChannel.invokeMethod('trackError', <String, dynamic>{
       'message': message,
       'properties': properties,
-      // Support `ErrorAttachmentLog`?
+      'stack': stackTrace.toString()
     });
   }
 
