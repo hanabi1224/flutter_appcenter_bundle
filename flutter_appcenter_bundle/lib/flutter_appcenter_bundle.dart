@@ -57,7 +57,7 @@ class AppCenter {
     });
   }
 
-  /// Check whether analytics is enalbed
+  /// Check whether analytics is enabled
   static Future<bool?> isAnalyticsEnabledAsync() async {
     return await _methodChannel.invokeMethod('isAnalyticsEnabled');
   }
@@ -82,6 +82,20 @@ class AppCenter {
   /// Enable or disable appcenter crash reports
   static Future configureCrashesAsync({required enabled}) async {
     await _methodChannel.invokeMethod('configureCrashes', enabled);
+  }
+
+  static Future trackErrorAsync(Exception exception,
+      [Map<String, String>? properties, String? stacktrace]) async {
+    final exceptionStringRepresentation = exception.toString();
+    final exceptionRepresentation = ExceptionRepresentation(
+        exceptionStringRepresentation, stacktrace, properties);
+    final serializedExceptionRepresentation =
+        json.encode(exceptionRepresentation.toJson());
+    await _methodChannel.invokeMethod('trackError', <String, dynamic>{
+      'exceptionStringRepresentation': exceptionStringRepresentation,
+      'stacktrace': stacktrace,
+      'properties': properties
+    });
   }
 
   /// Check whether appcenter distribution is enabled

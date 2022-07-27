@@ -6,6 +6,7 @@ import androidx.annotation.NonNull
 import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.analytics.Analytics
 import com.microsoft.appcenter.crashes.Crashes
+import com.microsoft.appcenter.crashes.ingestion.models.ErrorAttachmentLog
 import com.microsoft.appcenter.distribute.Distribute
 import com.microsoft.appcenter.distribute.UpdateTrack
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -108,6 +109,42 @@ class FlutterAppcenterBundlePlugin : FlutterPlugin, MethodCallHandler, ActivityA
                     val value = call.arguments as Boolean
                     Crashes.setEnabled(value).get()
                 }
+                "trackError" -> {
+                    val exception = Exception(call.argument<String>("exceptionStringRepresentation"),)
+                    val stackTrace = call.argument<String?>("stacktrace")
+                    if(stackTrace != null) {
+                        exception.stackTrace = stackTrace.split('\n').flatMap { line ->
+                            val regex =
+                                "^#\\d* *(?<methodName>[a-zA-Z1-9_]*).*\\((?<fileName>[a-zA-Z0-9:_/.]*.dart):(?<lineNumber>\\d*).*\$".toRegex()
+                            
+                            val stackTraceLine : Array<StackTraceElement> = if (regex.matches(line)) {
+                                val groups =
+                                    regex.matchEntire(line)!!.groups as? MatchNamedGroupCollection
+                                val fileName = groups!!["fileName"]!!.value
+                                val methodName = groups["methodName"]!!.value;
+                                val lineNumber = groups["lineNumber"]!!.value.toInt()
+                                
+                                arrayOf(
+                                    StackTraceElement(
+                                        fileName,
+                                        methodName,
+                                        fileName,
+                                        lineNumber
+                                    )
+                                )
+                            } else {
+                                emptyArray()
+                            }
+                            stackTraceLine.toList()
+                        }.toTypedArray()
+                    }
+                    val properties = call.argument<Map<String, String>?>("properties");
+                    var errorAttachmentLog: ErrorAttachmentLog? = null
+                    if(stackTrace != null){
+                        errorAttachmentLog = ErrorAttachmentLog.attachmentWithText(stackTrace, "stacktrace.txt");
+                    }
+                    Crashes.trackError(exception, properties, listOfNotNull(errorAttachmentLog));
+                }
                 "isAnalyticsEnabled" -> {
                     result.success(Analytics.isEnabled().get())
                     return
@@ -145,3 +182,4 @@ class FlutterAppcenterBundlePlugin : FlutterPlugin, MethodCallHandler, ActivityA
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
     }
 }
+
