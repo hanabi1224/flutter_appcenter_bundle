@@ -51,10 +51,12 @@ class AppCenter {
   /// Track events
   static Future trackEventAsync(String name,
       [Map<String, String>? properties]) async {
-    await _methodChannel.invokeMethod('trackEvent', <String, dynamic>{
-      'name': name,
-      'properties': properties ?? <String, String>{},
-    });
+    if (!Platform.isWindows) {
+      await _methodChannel.invokeMethod('trackEvent', <String, dynamic>{
+        'name': name,
+        'properties': properties ?? <String, String>{},
+      });
+    }
   }
 
   /// Check whether analytics is enalbed
