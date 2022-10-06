@@ -40,7 +40,7 @@ class FlutterAppcenterBundlePlugin : FlutterPlugin, MethodCallHandler, ActivityA
 
         @JvmStatic
         fun registerWith(registrar: Registrar) {
-            application = registrar.activity().application
+            application = registrar.activity()?.application
             val channel = MethodChannel(registrar.messenger(), methodChannelName)
             channel.setMethodCallHandler(FlutterAppcenterBundlePlugin())
         }
