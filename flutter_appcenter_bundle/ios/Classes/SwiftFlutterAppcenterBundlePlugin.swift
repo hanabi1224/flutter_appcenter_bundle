@@ -9,17 +9,17 @@ import AppCenterDistribute
 public class SwiftFlutterAppcenterBundlePlugin: NSObject, FlutterPlugin {
     static let methodChannelName = "com.github.hanabi1224.flutter_appcenter_bundle";
     static let instance = SwiftFlutterAppcenterBundlePlugin();
-    
+
     public static func register(binaryMessenger: FlutterBinaryMessenger) -> FlutterMethodChannel {
         let methodChannel = FlutterMethodChannel(name: methodChannelName, binaryMessenger: binaryMessenger)
         methodChannel.setMethodCallHandler(instance.methodChannelHandler);
         return methodChannel;
     }
-    
+
     public static func register(with registrar: FlutterPluginRegistrar) {
         register(binaryMessenger: registrar.messenger());
     }
-    
+
     public func methodChannelHandler(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         debugPrint(call.method)
         switch call.method {
@@ -42,6 +42,9 @@ public class SwiftFlutterAppcenterBundlePlugin: NSObject, FlutterPlugin {
             ])
         case "trackEvent":
             trackEvent(call: call, result: result)
+            return
+        case "trackError":
+            trackError(call: call, result: result)
             return
         case "isDistributeEnabled":
             result(MSDistribute.isEnabled())
@@ -72,22 +75,48 @@ public class SwiftFlutterAppcenterBundlePlugin: NSObject, FlutterPlugin {
             result(FlutterMethodNotImplemented);
             return
         }
-        
+
         result(nil);
     }
-    
+
     private func trackEvent(call: FlutterMethodCall, result: FlutterResult) {
         guard let args:[String: Any] = (call.arguments as? [String: Any]) else {
             result(FlutterError(code: "400", message:  "Bad arguments", details: "iOS could not recognize flutter arguments in method: (trackEvent)") )
             return
         }
-        
+
         let name = args["name"] as? String
         let properties = args["properties"] as? [String: String]
         if(name != nil) {
             MSAnalytics.trackEvent(name!, withProperties: properties)
         }
-        
+
         result(nil)
     }
+
+     private func trackError(call: FlutterMethodCall, result: FlutterResult) {
+        guard let args:[String: Any] = (call.arguments as? [String: Any]) else {
+            result(FlutterError(code: "400", message:  "Bad arguments", details: "iOS could not recognize flutter arguments in method: (trackError)") )
+            return
+        }
+
+        let exception = args["exceptionStringRepresentation"] as String
+        let stacktrace = args["stacktrace"] as? String
+        let properties = args["properties"] as? Dictionary<String, String>
+
+        let customError = AnalyticsError(message: exception)
+
+        var errorAttachmentLog: ErrorAttachmentLog?
+        if stacktrace != nil{
+            errorAttachmentLog = [ErrorAttachmentLog.attachment(withText: stacktrace, filename: "stacktrace.txt")]
+        }
+
+        MSCrashes.trackError(customError, properties: properties, attachments: errorAttachmentLog)
+
+        result(nil)
+    }
+}
+
+struct AnalyticsError: Error{
+    let message: String?
 }
