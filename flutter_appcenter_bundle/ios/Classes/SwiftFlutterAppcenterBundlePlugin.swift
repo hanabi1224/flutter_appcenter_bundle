@@ -7,7 +7,7 @@ import AppCenterCrashes
 import AppCenterDistribute
 
 public class SwiftFlutterAppcenterBundlePlugin: NSObject, FlutterPlugin {
-    static let methodChannelName = "com.github.hanabi1224.flutter_appcenter_bundle";
+    static let methodChannelName = "flutter_appcenter_bundle";
     static let instance = SwiftFlutterAppcenterBundlePlugin();
     
     public static func register(binaryMessenger: FlutterBinaryMessenger) -> FlutterMethodChannel {

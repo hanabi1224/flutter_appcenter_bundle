@@ -34,13 +34,13 @@ class FlutterAppcenterBundlePlugin : FlutterPlugin, MethodCallHandler, ActivityA
     // depending on the user's project. onAttachedToEngine or registerWith must both be defined
     // in the same class.
     companion object {
-        const val methodChannelName = "com.github.hanabi1224.flutter_appcenter_bundle"
+        const val methodChannelName = "flutter_appcenter_bundle"
 
         var application: Application? = null
 
         @JvmStatic
         fun registerWith(registrar: Registrar) {
-            application = registrar.activity().application
+            application = registrar.activity()?.application
             val channel = MethodChannel(registrar.messenger(), methodChannelName)
             channel.setMethodCallHandler(FlutterAppcenterBundlePlugin())
         }
