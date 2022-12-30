@@ -1,4 +1,4 @@
-package com.github.hanabi1224.flutter_appcenter_bundle
+package flutter_appcenter_bundle_updated_to_null_safety
 
 import android.app.Application
 import android.util.Log

@@ -1,6 +1,6 @@
 name: flutter_appcenter_bundle_updated_to_null_safety
 description: This plugin currently bundles AppCenter Analytics, Crashes and Distribute. To learn more about AppCenter, go to https://aka.ms/appcenterdocs
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/IngSm/flutter_appcenter_bundle_updated_to_null_safety
 
 environment:
