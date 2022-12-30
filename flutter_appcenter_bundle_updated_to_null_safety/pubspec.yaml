@@ -21,7 +21,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: flutter_appcenter_bundle
+        package: flutter_appcenter_bundle_updated_to_null_safety
         pluginClass: FlutterAppcenterBundlePlugin
       ios:
         pluginClass: FlutterAppcenterBundlePlugin
