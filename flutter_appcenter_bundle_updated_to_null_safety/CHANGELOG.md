@@ -1,3 +1,6 @@
+## 1.0.3
+Fixed errors in example, added support for iOS
+
 ## 1.0.2
 Fixed root class
 
