@@ -1,4 +1,4 @@
-#import "FlutterAppcenterBundlePlugin.h"
+#import "FlutterAppcenterBundleUpdatedToNullSafetyPlugin.h"
 #if __has_include(<flutter_appcenter_bundle_updated_to_null_safety/flutter_appcenter_bundle_updated_to_null_safety-Swift.h>)
 #import <flutter_appcenter_bundle_updated_to_null_safety/flutter_appcenter_bundle_updated_to_null_safety-Swift.h>
 #else
