@@ -1,3 +1,6 @@
+## 1.0.5
+Fixed naming of plugin in iOS
+
 ## 1.0.4
 Fixed `file not found` in iOS
 
