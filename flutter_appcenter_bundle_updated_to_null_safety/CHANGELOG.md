@@ -1,3 +1,6 @@
+## 1.0.6
+Fixed channel name in iOS
+
 ## 1.0.5
 Fixed naming of plugin in iOS
 

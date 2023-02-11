@@ -7,7 +7,7 @@ import AppCenterCrashes
 import AppCenterDistribute
 
 public class SwiftFlutterAppcenterBundleUpdatedToNullSafetyPlugin: NSObject, FlutterPlugin {
-    static let methodChannelName = "flutter_appcenter_bundle_updated_to_null_safety";
+    static let methodChannelName = "flutter_appcenter_bundle";
     static let instance = SwiftFlutterAppcenterBundleUpdatedToNullSafetyPlugin();
     
     public static func register(binaryMessenger: FlutterBinaryMessenger) -> FlutterMethodChannel {
