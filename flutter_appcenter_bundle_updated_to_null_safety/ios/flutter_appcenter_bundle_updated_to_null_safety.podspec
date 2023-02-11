@@ -3,7 +3,7 @@
 # Run `pod lib lint flutter_appcenter_bundle.podspec' to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'flutter_appcenter_bundle'
+  s.name             = 'flutter_appcenter_bundle_updated_to_null_safety'
   s.version          = '0.0.1'
   s.summary          = 'A new flutter plugin project.'
   s.description      = <<-DESC
