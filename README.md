@@ -4,3 +4,5 @@
 ======
 
 See package [readme](https://github.com/hanabi1224/flutter_appcenter_bundle/tree/master/flutter_appcenter_bundle)
+
+## Forked from https://github.com/hanabi1224/flutter_appcenter_bundle
