@@ -10,6 +10,6 @@
 
 @implementation FlutterAppcenterBundleUpdatedToNullSafetyPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-  [SwiftFlutterAppcenterBundlePluginUpdatedToNullSafety registerWithRegistrar:registrar];
+  [SwiftFlutterAppcenterBundleUpdatedToNullSafetyPlugin registerWithRegistrar:registrar];
 }
 @end
