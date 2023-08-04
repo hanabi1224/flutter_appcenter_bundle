@@ -13,10 +13,10 @@ For detailed AppCenter API reference, go to https://aka.ms/appcenterdocs
 
 ## Build
 
-Appcenter distribute has an [issue](https://docs.microsoft.com/en-us/appcenter/sdk/distribute/android#remove-in-app-updates-for-google-play-builds) with pulishing apps to google play.
+Appcenter distribute has an [issue](https://docs.microsoft.com/en-us/appcenter/sdk/distribute/android#remove-in-app-updates-for-google-play-builds) with publishing apps to Google Play.
 To workaround
 
-use ```flutter build --flavor googlePlay``` to build for googlePlay and ```flutter build --flavor appCenter``` for appCenter.
+use ```flutter build --flavor googlePlay``` to build for Google Play and ```flutter build --flavor appCenter``` for appCenter.
 
 ```flutter build apk``` command will build both under build/app/outputs/flutter-apk by adding below section to android/app/build.gradle
 
